@@ -1,0 +1,33 @@
+{
+    "playInfo": {
+        "curDungeon": "Griffon's Dungeon",
+        "playtime": 3740.810791015625,
+        "stage": 1,
+        "parts": 250,
+        "isAct": true
+    },
+    "playerStatusInfo": {
+        "maxHp": 110,
+        "remainHp": 110,
+        "atk": 20
+    },
+    "weaponInfo": {
+        "weaponsList": [
+            {
+                "name": "EnergySphereGun",
+                "level": 1,
+                "exp": 0
+            },
+            {
+                "name": "LinearGun",
+                "level": 1,
+                "exp": 0
+            },
+            {
+                "name": "ShotGun",
+                "level": 1,
+                "exp": 0
+            }
+        ]
+    }
+}
