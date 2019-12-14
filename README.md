@@ -11,3 +11,6 @@
 구직 활동을 위해 포트폴리오 제작을 위해 시작된 프로젝트로, 학교 캡스톤 디자인 수업과 병행하여 수행하였습니다.  
 1차 빌드 이후 repository를 새로 생성했으며, 이전 주소는 https://github.com/ILoveMilktea/Dogfight 입니다.  
 많은 관심 바랍니다.
+
+
+12.14 - 현재까지 개발된 버전 영상 https://youtu.be/zepTD0QczKU  
