@@ -67,6 +67,9 @@ public class RushEnemy : Enemy
     //Rushing Miss상태일때 Searching상태로 바로 넘어가는 거 방지
     private bool isRushTimerOn=false;
 
+    //knockback시 destination 저장
+    private Coroutine moveWhileKnonkbackCoroutine;
+
     // Trajectory, 공격 궤적
     private TrajectoryLine trajectoryLine;
 
@@ -115,6 +118,11 @@ public class RushEnemy : Enemy
 
     private void OnDisable()
     {
+        StopAllCoroutines();
+        if (trajectoryLine)
+        {
+            trajectoryLine.RemoveLine();
+        }
         ResetValue();
     }
 
@@ -225,7 +233,7 @@ public class RushEnemy : Enemy
 
         while (!isDead && FightSceneController.Instance.GetCurrentFightState() != FightState.Dead)
         {
-            Debug.Log("상태" + rushEnemyState);
+            //Debug.Log("상태" + rushEnemyState);
             if (rushEnemyState == RushEnemyState.IDLE)
             {
                 SetAllAnimationFalse();
@@ -279,7 +287,7 @@ public class RushEnemy : Enemy
             {
                 Vector3 enemyPosition = transform.position;
                 enemyPosition.y = 0;
-                Debug.Log("헤매기" + enemyPosition + "/" + rushDestination);
+                //Debug.Log("헤매기" + enemyPosition + "/" + rushDestination);
                 //만약 적이 Rush목표지점에 도착했다면                
                 if (enemyPosition == rushDestination)
                 { 
@@ -358,6 +366,28 @@ public class RushEnemy : Enemy
         isOnRush = false;
         rushTimerCoroutine = null;
         isRushTimerOn = false;
+    }
+    protected override IEnumerator KnockBackTimer(Vector3 dir, float force, float knockBackDuration)
+    {
+        float timer = 0f;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        Vector3 startVelocity = dir.normalized * force;
+        Vector3 velocity = startVelocity;
+        navMeshAgent.isStopped = true;       
+
+        while (timer < knockBackDuration)
+        {
+            rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+            yield return new WaitForEndOfFrame();
+            timer += Time.fixedDeltaTime;
+            velocity = Vector3.Lerp(startVelocity, Vector3.zero, timer / knockBackDuration);
+        }
+        StopKnockBack();
+        navMeshAgent.isStopped = false;
+        isKnockBack = false;
+        //    yield return new WaitForSeconds(knockBackDuration);        
+        //    StopKnockBack();
+        //    isKnockBack = false;
     }
 
     private void OnTriggerEnter(Collider other)

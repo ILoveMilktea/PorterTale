@@ -86,6 +86,7 @@ MonoBehaviour:
   damage: 5
   burstCount: 3
   knockBackForce: 10
+  KnockBackDuration: 0.2
   directionNumber: 3
   projectileMaxAngle: 30
   criticalChance: 0

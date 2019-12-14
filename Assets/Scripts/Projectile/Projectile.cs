@@ -79,7 +79,10 @@ public abstract class Projectile : MonoBehaviour
     {
         knockBackForce = force;
     }
-
+    public void SetKnockBackDuration(float duration)
+    {
+        knockBackDuration = duration;
+    }
     public void SetDamage(float damage)
     {
         this.damage = damage;

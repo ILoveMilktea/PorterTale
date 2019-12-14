@@ -11,8 +11,14 @@ public class TrajectoryLine : MonoBehaviour
 
     public LineRenderer line;
 
+    public float defaultWidth = 0.5f;
     public float lineWidth = 0.5f;
     public float lineAngle = 30.0f;
+
+    private void OnEnable()
+    {
+        lineWidth = defaultWidth;
+    }
 
     public IEnumerator DrawTrajectoryWhileTime(GameObject source, GameObject target, float displayTime)
     {

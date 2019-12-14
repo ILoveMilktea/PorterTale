@@ -48,7 +48,6 @@ public class JoystickBase : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
     // Gameobject drag
     public virtual void OnDrag(PointerEventData data)
     {
-        Debug.Log("drag");
         touchPos = data.position;
         Vector2 zeroPoint = new Vector2(border.position.x, border.position.y);
         Vector2 moveVector = touchPos - zeroPoint;

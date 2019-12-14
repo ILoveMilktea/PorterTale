@@ -47,15 +47,21 @@ public class LinearShootingNoMovingEnemy : Enemy
 
             animator = this.gameObject.GetComponent<Animator>();
             target = FindObjectOfType<Player>().gameObject;
+
             SetHealth();
             isDead = false;
             linearShootingNoMovingEnemyState = LinearShootingNoMovingEnemyState.IDLE;
+            shootingCoroutine = null;
 
             animator.SetBool("IsDead1", false);
 
             StartCoroutine(EnemyAction());
             StartCoroutine(CheckEnemyState());
         }
+    }
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     protected override void Move()
@@ -167,4 +173,5 @@ public class LinearShootingNoMovingEnemy : Enemy
         transform.rotation = Quaternion.Lerp(transform.rotation, originalAngle, Time.deltaTime * turnSpeed);
 
     }
+
 }

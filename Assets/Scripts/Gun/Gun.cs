@@ -37,6 +37,7 @@ public abstract class Gun : MonoBehaviour
     // ------------> shotgun에서 이동
     //샷건 KnockBack Force
     public float knockBackForce = 10.0f;
+    public float KnockBackDuration = 0.5f;
 
     //발사체 날라가는 방향 개수
     public int directionNumber = 3;

@@ -105,6 +105,7 @@ public class LinearShootingEnemy : Enemy
 
     private void OnDisable()
     {
+        StopAllCoroutines();
         ResetValue();
     }
 
@@ -291,4 +292,5 @@ public class LinearShootingEnemy : Enemy
         animator.SetBool("isRunning", false);
         animator.SetBool("isDead", false);        
     }
+
 }

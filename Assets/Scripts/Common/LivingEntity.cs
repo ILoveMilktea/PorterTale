@@ -75,7 +75,7 @@ public abstract class LivingEntity : MonoBehaviour,IDamageable
         StopKnockBack();
         isKnockBack = false;
     }
-    IEnumerator KnockBackTimer(Vector3 dir, float force, float knockBackDuration)
+    protected virtual IEnumerator KnockBackTimer(Vector3 dir, float force, float knockBackDuration)
     {
         float timer = 0f;
         Rigidbody rb = GetComponent<Rigidbody>();

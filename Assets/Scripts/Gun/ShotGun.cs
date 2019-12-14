@@ -29,7 +29,6 @@ public class ShotGun : Gun
 
         if (Time.time > nextShotTime)
         {
-            Debug.Log("발사");
             //Time.time : 게임이 시작되고 지난 시간(초)
             nextShotTime = Time.time + msBetweenShots / 1000;
 
@@ -80,6 +79,7 @@ public class ShotGun : Gun
                 newProjectile.SetSpeed(muzzleVelocity);
                 newProjectile.SetKnockBackMode(true);
                 newProjectile.SetKnockBackForce(knockBackForce);
+                newProjectile.SetKnockBackDuration(KnockBackDuration);
                 newProjectile.SetKnockBackMuzzlePosition(muzzle.position);
 
                 //------------- critical 적용
