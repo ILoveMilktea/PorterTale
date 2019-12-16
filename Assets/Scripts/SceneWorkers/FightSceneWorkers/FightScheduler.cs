@@ -52,7 +52,7 @@ public class FightScheduler : MonoBehaviour
         {
             // 보스전
             FightSceneController.Instance.ChangeFightState(FightState.Clear_Dungeon);
-            FightSceneController.Instance.DungeonClear();
+            FightUIController.Instance.ShowResult();
         }
         else
         {

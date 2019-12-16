@@ -28,7 +28,11 @@ public class PlayerCharacterUI : CharacterUI
         float sizeRatio = characterWidth / HpWidth;
         hpRT.sizeDelta = new Vector2(hpRT.sizeDelta.x * sizeRatio, hpRT.sizeDelta.y);
     }
-
+    public override void SetStatus(CharacterStatus status)
+    {
+        base.SetStatus(status);
+        SetRemainHp(status.remainHp);
+    }
     public void SetRemainHp(int value)
     {
         characterHp.value = value;

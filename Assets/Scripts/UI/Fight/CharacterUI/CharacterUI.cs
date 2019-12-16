@@ -68,16 +68,20 @@ public class CharacterUI : MonoBehaviour
         rectTransform.anchoredPosition = new Vector2(UIScreenPos.x * fovX, UIScreenPos.y * fovY);
     }
 
+    public virtual void SetStatus(CharacterStatus status)
+    {
+        SetName(status.name);
+        SetMaxHp(status.maxHp);
+    }
+
     public void SetName(string name)
     {
         characterName.text = name;
     }
-
     public void SetTarget(GameObject targetObj)
     {
         target = targetObj.transform;
     }
-
     public void SetMaxHp(int maxHp)
     {
         characterHp.maxValue = maxHp;

@@ -21,7 +21,6 @@ public class UpgradeSceneController : MonoSingleton<UpgradeSceneController>
     public PlayerStatusWindow statusWindow;
     public SelectAct selectAct;
     public WeaponWindow weaponWindow;
-    public ExitButton exitButton;
     public PopupYN popupYN;
     public PopupResult popupResult;
 
@@ -58,13 +57,11 @@ public class UpgradeSceneController : MonoSingleton<UpgradeSceneController>
     {
         selectAct.gameObject.SetActive(true);
         weaponWindow.gameObject.SetActive(true);
-        exitButton.gameObject.SetActive(true);
         popupYN.gameObject.SetActive(true);
         popupResult.gameObject.SetActive(true);
 
         selectAct.gameObject.SetActive(false);
         weaponWindow.gameObject.SetActive(false);
-        exitButton.gameObject.SetActive(false);
         popupYN.gameObject.SetActive(false);
         popupResult.gameObject.SetActive(false);
     }
@@ -90,14 +87,6 @@ public class UpgradeSceneController : MonoSingleton<UpgradeSceneController>
         statusWindow.RedrawWindow();
     }
     
-    public void ActiveExitButton(GameObject targetUI)
-    {
-        if(!exitButton.gameObject.activeSelf)
-        {
-            exitButton.gameObject.SetActive(true);
-        }
-        exitButton.PushUI(targetUI);
-    }
     public void OpenPopupYN(string description, Action yesFunc, Action noFunc)
     {
         StartCoroutine(UIEffect.ExpandFrom90(popupYN.gameObject));

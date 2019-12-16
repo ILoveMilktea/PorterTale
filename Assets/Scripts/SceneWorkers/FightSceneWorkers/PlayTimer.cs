@@ -5,18 +5,9 @@ using UnityEngine.UI;
 
 public class PlayTimer : MonoBehaviour
 {
-    public Text debugTimer; // display playtime for debug
-
     private float playtime;
     private bool isFight;
     private IEnumerator timer;
-
-    private void Start()
-    {
-        playtime = DataManager.Instance.GetPlayInfo.Playtime;
-        isFight = false;
-        timer = Timer();
-    }
 
     public IEnumerator Timer()
     {
@@ -29,7 +20,7 @@ public class PlayTimer : MonoBehaviour
                 playtime += Time.deltaTime * 100;
             }
 
-            debugTimer.text = playtime.ToString("00:00");
+            FightUIController.Instance.SetTimerText(playtime);
         }
     }
 
@@ -61,6 +52,9 @@ public class PlayTimer : MonoBehaviour
     }
     public void StartTimer()
     {
+        playtime = DataManager.Instance.GetPlayInfo.Playtime;
+        isFight = false;
+        timer = Timer();
         StartCoroutine(timer);
     }
     public void StopTimer()

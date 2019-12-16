@@ -16,13 +16,6 @@ static class Constants
     public const string EnemyTag = "Enemy";
 }
 
-public enum SceneType
-{
-    Start,
-    Fight,
-    Upgrade
-}
-
 public class GameManager : MonoSingleton<GameManager>
 {
     public Image cutEffectImage;

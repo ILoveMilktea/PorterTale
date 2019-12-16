@@ -153,11 +153,11 @@ public class GunController : MonoBehaviour
 
         if(gun.isSkillEquiped)
         {
-            FightSceneController.Instance.SkillButtonOn(type, gun.skillKey);
+            FightUIController.Instance.SkillButtonOn(type, gun.skillKey);
         }
         else
         {
-            FightSceneController.Instance.SkillButtonOff();
+            FightUIController.Instance.SkillButtonOff();
         }
     }
 
