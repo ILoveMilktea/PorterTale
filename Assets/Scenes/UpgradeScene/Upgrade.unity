@@ -1797,7 +1797,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 5b56d9fa0e8bd6e409ed188db38a692c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f41a1b252575f94bbd606398954416d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7682,7 +7682,6 @@ MonoBehaviour:
   statusWindow: {fileID: 1712398603}
   selectAct: {fileID: 2113323420}
   weaponWindow: {fileID: 7544122104484375253}
-  exitButton: {fileID: 0}
   popupYN: {fileID: 1829822401}
   popupResult: {fileID: 434757722}
   actButton: {fileID: 30150213}
@@ -8279,7 +8278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2113323420
 MonoBehaviour:
   m_ObjectHideFlags: 0
