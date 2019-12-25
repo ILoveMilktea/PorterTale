@@ -8,9 +8,9 @@ public static class ConstDecriptions
 {
     public const string FightButton = "다음 스테이지로 진행하시겠습니까?";
 
-    public const string Select_RestButton = "휴식을 취해 체력을 비축합니다.\n<size=50>남은 행동 시간을 소모합니다.</size>"; // "Fight"
-    public const string Select_EatButton = "잡은 동물을 구워 먹고 체력을 회복합니다.\n<size=50>남은 행동 시간을 소모합니다.</size>";
-    public const string Select_Training = "생명의 기운을 흡수해 신체를 강화합니다.\n<size=50>남은 행동 시간을 소모합니다.</size>";
+    public const string Select_RestButton = "휴식을 취해 체력을 비축합니다.\n<size=50>(체력 회복 +10, 체력 버프 +10)</size>"; // "Fight"
+    public const string Select_EatButton = "잡은 동물을 구워 먹고 체력을 회복합니다.\n<size=50>(체력 회복 +30)</size>";
+    public const string Select_Training = "생명의 기운을 흡수해 신체를 강화합니다.\n<size=50>(체력 버프 +5, 공격력 버프 +2)</size>";
     public const string Select_Search = "탐색?";
     public const string Select_Retry = "재전투?";
 }

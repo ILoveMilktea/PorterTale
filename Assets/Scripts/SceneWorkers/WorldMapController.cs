@@ -28,7 +28,7 @@ public class WorldMapController : MonoSingleton<WorldMapController>
 
     public void OnClickDungeon_Griffon()
     {
-        OpenPopupYN("그리폰 던전으로\n배달을 시작하시겠습니까?",
+        OpenPopupYN("그리폰 던전으로\n들어가시겠습니까?",
             EnterDungeon_Griffon, ClosePopupYN);
     }
 

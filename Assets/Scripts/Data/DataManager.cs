@@ -11,9 +11,10 @@ static class Const_Path
     public const string playInfoPath = "/PlayInfo.byte";
     public const string playerStatusInfoPath = "/PlayerStatusInfo.byte";
     public const string WeaponInfoPath = "/WeaponInfo.byte";
+    public const string InventoryInfoPath = "/InvetoryInfo.byte";
 }
 
-public class DataManager : MonoSingleton<DataManager>
+public partial class DataManager : MonoSingleton<DataManager>
 {
     private string dataPath;
     private int maxExp = 100; // 임시 설정
@@ -22,6 +23,7 @@ public class DataManager : MonoSingleton<DataManager>
     private DataCenter dataCenter;
     private DataSave dataSave;
     private DataLoad dataLoad;
+
     protected override void Init()
     {
         DontDestroyOnLoad(gameObject);
@@ -55,17 +57,59 @@ public class DataManager : MonoSingleton<DataManager>
         dataLoad = new DataLoad();
     }
 
+    public bool CheckSaveData()
+    {
+        if (File.Exists(dataPath + Const_Path.playInfoPath))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public void RemoveSaveData()
+    {
+        File.Delete(dataPath + Const_Path.playInfoPath);
+        File.Delete(dataPath + Const_Path.playerStatusInfoPath);
+        File.Delete(dataPath + Const_Path.WeaponInfoPath);
+    }
+
+    public void Save()
+    {
+        dataSave.SaveUserData(dataPath);
+
+        if (SceneManager.GetActiveScene().name == "Upgrade")
+        {
+            UpgradeSceneController.Instance.RedrawStatusWindow();
+        }
+    }
+
+    public void Load()
+    {
+        dataLoad.LoadUserData(dataPath);
+    }
+
+    public void ResetDungeonData()
+    {
+        GetPlayInfo.ResetDungeonPlay();
+        GetPlayerStatus.ResetDungeonPlayStatus();
+    }
+}
+
+// PlayInfo 부분
+public partial class DataManager : MonoSingleton<DataManager>
+{
     public PlayInfo GetPlayInfo { get { return dataCenter.playInfo; } }
-    public PlayerStatusInfo GetPlayerStatus { get { return dataCenter.playerStatusInfo; } }
-    public Dictionary<WeaponType, WeaponInfo> GetWeapons { get { return dataCenter.weapons; } }
 
     public void SetPlayInfo(PlayInfo info)
     {
-        SetDungeonName(info.CurDungeon);
-        SetPlayTime(info.Playtime);
-        SetStage(info.Stage);
-        SetParts(info.Parts);
-        SetAlreadyAct(info.AlreadyAct);
+        //SetDungeonName(info.CurDungeon);
+        //SetPlayTime(info.Playtime);
+        //SetStage(info.Stage);
+        //SetParts(info.Parts);
+        //SetAlreadyAct(info.AlreadyAct);
+        dataCenter.SetPlayInfo(info);
     }
     public void SetDungeonName(string curDungeon)
     {
@@ -99,14 +143,19 @@ public class DataManager : MonoSingleton<DataManager>
     {
         GetPlayInfo.SetAlreadyAct(value);
     }
-
+}
+// PlayerStatus 부분
+public partial class DataManager : MonoSingleton<DataManager>
+{
+    public PlayerStatusInfo GetPlayerStatus { get { return dataCenter.playerStatusInfo; } }
     public void SetPlayerStatusInfo(PlayerStatusInfo info)
     {
-        SetMaxHp(info.MaxHp);
-        SetBuffHp(info.BuffHp);
-        SetRemainHp(info.RemainHp);
-        SetAtk(info.Atk);
-        SetBuffAtk(info.BuffAtk);
+        //SetMaxHp(info.MaxHp);
+        //SetBuffHp(info.BuffHp);
+        //SetRemainHp(info.RemainHp);
+        //SetAtk(info.Atk);
+        //SetBuffAtk(info.BuffAtk);
+        dataCenter.SetPlayerStatusInfo(info);
     }
     public void SetMaxHp(int value)
     {
@@ -156,7 +205,11 @@ public class DataManager : MonoSingleton<DataManager>
     {
         SetBuffAtk(GetPlayerStatus.BuffAtk + value);
     }
-
+}
+// Weapon 부분
+public partial class DataManager : MonoSingleton<DataManager>
+{
+    public Dictionary<WeaponType, WeaponInfo> GetWeapons { get { return dataCenter.weapons; } }
     public void SetWeapons(Dictionary<WeaponType, WeaponInfo> weapons)
     {
         dataCenter.SetWeapons(weapons);
@@ -165,48 +218,38 @@ public class DataManager : MonoSingleton<DataManager>
     {
         GetWeapons.Add(type, info);
     }
-    public void SetSkillTree(WeaponType type, Dictionary<string,WeaponSkill> tree)
+    public void SetSkillTree(WeaponType type, Dictionary<string, WeaponSkill> tree)
     {
         GetWeapons[type].SetSkillTree(tree);
     }
-    
-    public bool CheckSaveData()
+
+}
+// inventory 부분
+public partial class DataManager : MonoSingleton<DataManager>
+{
+    public InventoryInfo GetInventoryInfo { get { return dataCenter.inventoryInfo; } }
+    public void SetInventoryInfo(InventoryInfo inventory)
     {
-        if(File.Exists(dataPath+Const_Path.playInfoPath))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        dataCenter.SetInventoryInfo(inventory);
     }
-    public void RemoveSaveData()
+    public void AddComsumableItem(int key)
     {
-        File.Delete(dataPath + Const_Path.playInfoPath);
-        File.Delete(dataPath + Const_Path.playerStatusInfoPath);
-        File.Delete(dataPath + Const_Path.WeaponInfoPath);
+        dataCenter.inventoryInfo.consumables[key]++;
+    }
+    public void RemoveComsumableItem(int key)
+    {
+        dataCenter.inventoryInfo.consumables[key]--;
+    }
+    public void AddDropItem(int key)
+    {
+        dataCenter.inventoryInfo.drops[key]++;
+    }
+    public void RemoveDropItem(int key)
+    {
+        dataCenter.inventoryInfo.drops[key]--;
     }
 
-    public void Save()
-    {
-        dataSave.SaveUserData(dataPath);
 
-        if (SceneManager.GetActiveScene().name == "Upgrade")
-        {
-            UpgradeSceneController.Instance.RedrawStatusWindow();
-        }
-    }
 
-    public void Load()
-    {
-        dataLoad.LoadUserData(dataPath);
-    }
-
-    public void ResetDungeonData()
-    {
-        GetPlayInfo.ResetDungeonPlay();
-        GetPlayerStatus.ResetDungeonPlayStatus();
-    }
 }
 

@@ -98,3 +98,19 @@ public class WeaponSkill
     public void SetIsActivated(bool value) { IsActivated = value; }
     public void SetUsedParts(int value) { UsedParts = value; }
 }
+
+public class InventoryInfo
+{
+    public Dictionary<int, int> consumables { get; private set; }
+    public Dictionary<int, int> drops { get; private set; }
+
+    public InventoryInfo()
+    {
+        consumables = new Dictionary<int, int>();
+        drops = new Dictionary<int, int>();
+    }
+
+    public void SetConsumables(Dictionary<int, int> value) { consumables = value; }
+    public void SetDrops(Dictionary<int, int> value) { drops = value; }
+
+}

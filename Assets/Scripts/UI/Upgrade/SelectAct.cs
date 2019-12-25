@@ -75,7 +75,7 @@ public class SelectAct: MonoBehaviour
         DataManager.Instance.AddBuffHp(10);
         DataManager.Instance.AddRemainHp(10);
 
-        UpgradeSceneController.Instance.OpenPopupResult(rest.image.sprite, "피로가..회복...zzZ\n(체력 회복 +10, 체력 버프 +10)", UpgradeSceneController.Instance.ClosePopupResult);
+        UpgradeSceneController.Instance.OpenPopupResult(rest.image.sprite, "피로가..회복...zzZ", UpgradeSceneController.Instance.ClosePopupResult);
     }
 
     private void ActEat()
@@ -84,7 +84,7 @@ public class SelectAct: MonoBehaviour
         //DataManager.Instance.AddBuffHp(10);
         DataManager.Instance.AddRemainHp(30);
         
-        UpgradeSceneController.Instance.OpenPopupResult(eat.image.sprite, "생기가 돈다!\n(체력 회복 +30)", UpgradeSceneController.Instance.ClosePopupResult);
+        UpgradeSceneController.Instance.OpenPopupResult(eat.image.sprite, "생기가 돈다!", UpgradeSceneController.Instance.ClosePopupResult);
     }
 
     private void ActTraining()
@@ -93,7 +93,7 @@ public class SelectAct: MonoBehaviour
         DataManager.Instance.AddBuffHp(5);
         DataManager.Instance.AddBuffAtk(2);
         
-        UpgradeSceneController.Instance.OpenPopupResult(training.image.sprite, "마음이 고양된다.\n(체력 버프 +5, 공격력 버프 +2)", UpgradeSceneController.Instance.ClosePopupResult);
+        UpgradeSceneController.Instance.OpenPopupResult(training.image.sprite, "마음이 고양된다.", UpgradeSceneController.Instance.ClosePopupResult);
     }
 
     private void ActSearch()

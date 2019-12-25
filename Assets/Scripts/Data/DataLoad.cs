@@ -12,6 +12,7 @@ public class DataLoad
         LoadPlayInfo(directoryPath + Const_Path.playInfoPath);
         LoadPlayerStatusInfo(directoryPath + Const_Path.playerStatusInfoPath);
         LoadWeaponInfo(directoryPath + Const_Path.WeaponInfoPath);
+       //LoadInvetoryInfo(directoryPath + Const_Path.InventoryInfoPath);
     }
 
 
@@ -139,5 +140,45 @@ public class DataLoad
             return null;
         }
     }
-    
+
+    private void LoadInvetoryInfo(string dataPath)
+    {
+        byte[] saveFile = File.ReadAllBytes(dataPath);
+        MemoryStream memoryStream = new MemoryStream(saveFile);
+        BinaryReader binaryReader = new BinaryReader(memoryStream);
+
+        InventoryInfo info = new InventoryInfo();
+        PropertyInfo[] properties = info.GetType().GetProperties();
+
+        foreach (PropertyInfo item in properties)
+        {
+            Dictionary<int, int> category = LoadItems(binaryReader);
+            object[] obj = new object[] { category };
+
+            MethodInfo SetMethod = info.GetType().GetMethod("Set" + item.Name, new Type[] { item.PropertyType });
+
+            SetMethod.Invoke(info, obj);
+        }
+
+        DataManager.Instance.SetInventoryInfo(info);
+
+        binaryReader.Close();
+        memoryStream.Close();
+    }
+
+    private Dictionary<int,int> LoadItems(BinaryReader note)
+    {
+        Dictionary<int, int> items = new Dictionary<int, int>();
+        int count = note.ReadInt32();
+
+        for (int i = 0; i < count; i++)
+        {
+            int key = note.ReadInt32();
+            int value = note.ReadInt32();
+
+            items.Add(key, value);
+        }
+
+        return items;
+    }
 }

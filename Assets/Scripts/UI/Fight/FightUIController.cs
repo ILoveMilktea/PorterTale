@@ -42,6 +42,15 @@ public class FightUIController : MonoSingleton<FightUIController>
         pauseButton.onClick.AddListener(OnClickPauseButton);
     }
 
+    private void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            resultWindow.OpenResultWindow();
+        }
+    }
+
     public void SetStageUI()
     {
         SetUIToAllCharacters();

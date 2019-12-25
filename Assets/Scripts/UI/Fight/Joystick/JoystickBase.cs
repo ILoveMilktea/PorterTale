@@ -19,7 +19,7 @@ public class JoystickBase : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
     protected RectTransform border;
     [SerializeField]
     protected RectTransform handle;
-    private Canvas canvas;
+    protected Canvas canvas;
 
     protected Vector2 touchPos;
     protected float handleMoveRange;

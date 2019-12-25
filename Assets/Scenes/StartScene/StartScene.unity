@@ -411,7 +411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -400}
+  m_AnchoredPosition: {x: 0, y: -350}
   m_SizeDelta: {x: 1920, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &267211505
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 263ef331874eba4409e6ffb81102347a, type: 3}
     m_FontSize: 120
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 120
@@ -447,7 +447,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Heimer's myth
+  m_Text: "\uD3EC\uD130\uD14C\uC77C"
 --- !u!222 &267211506
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -994,14 +994,14 @@ MonoBehaviour:
   - {fileID: 1989060081637774, guid: ba4544b1a50b9604586635d8220fe914, type: 3}
   - {fileID: 1745447707790088, guid: f5a07b591c57ebe45829868affda1a1c, type: 3}
   - {fileID: 1781065274991804, guid: 927a927b4c39c894e94004b661b82e47, type: 3}
-  - {fileID: 1892310713830552, guid: c5e097b0eb89a7343bdf761a1670d2c3, type: 3}
+  - {fileID: 1526646866334644, guid: a68d651cb81757343abbe1d39205eb96, type: 3}
   - {fileID: 1781065274991804, guid: 59e802e168edd1c4e9314f525eb12571, type: 3}
   - {fileID: 703457413352339137, guid: 857e5b7ab1b04724581d0ed213be450d, type: 3}
   - {fileID: 1781065274991804, guid: 831e459026cac6f49a046e95dc2ee2ba, type: 3}
   - {fileID: 1781065274991804, guid: 538c663a33028c94e8a56abbde8c301a, type: 3}
   - {fileID: 1781065274991804, guid: f81e1a6ad61e4f040b3490378ef9b70f, type: 3}
   - {fileID: 1781065274991804, guid: 339c542e3deec7546bb6dd6ac936c0bf, type: 3}
-  poolAmount: 14000000050000001400000032000000320000003200000032000000320000000a0000000700000005000000030000002103000021030000210300002103000021030000140000000300000003000000
+  poolAmount: 14000000050000001400000032000000320000003200000032000000320000000a0000000700000005000000030000002103000021030000210300000100000021030000140000000300000003000000
 --- !u!114 &876707042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,7 +1273,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 150c4cc8b609d644487a4b2228a72444, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 888b659e1270f70478a10255530bdae9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

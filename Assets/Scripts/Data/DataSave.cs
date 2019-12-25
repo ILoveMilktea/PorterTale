@@ -12,6 +12,7 @@ public class DataSave
         SavePlayInfo(directoryPath + Const_Path.playInfoPath);
         SavePlayerStatusInfo(directoryPath + Const_Path.playerStatusInfoPath);
         SaveWeaponInfo(directoryPath + Const_Path.WeaponInfoPath);
+        SaveInventoryInfo(directoryPath + Const_Path.InventoryInfoPath);
     }
 
     private void SavePlayInfo(string dataPath)
@@ -33,6 +34,7 @@ public class DataSave
         binaryWriter.Close();
         memoryStream.Close();
     }
+
     private void SavePlayerStatusInfo(string dataPath)
     {
         MemoryStream memoryStream = new MemoryStream();
@@ -52,6 +54,7 @@ public class DataSave
         binaryWriter.Close();
         memoryStream.Close();
     }
+
     private void SaveWeaponInfo(string dataPath)
     {
         MemoryStream memoryStream = new MemoryStream();
@@ -108,7 +111,6 @@ public class DataSave
 
         return note;
     }
-
     private BinaryWriter FindTypeAndWrite(BinaryWriter note, Type propertyType, object item)
     {
         if (propertyType == typeof(int))
@@ -136,6 +138,41 @@ public class DataSave
             Debug.Log("Cannot find type");
         }
 
+        return note;
+    }
+
+
+    private void SaveInventoryInfo(string dataPath)
+    {
+        MemoryStream memoryStream = new MemoryStream();
+        BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+
+        InventoryInfo info = DataManager.Instance.GetInventoryInfo;
+        PropertyInfo[] properties = info.GetType().GetProperties();
+
+        foreach (PropertyInfo item in properties)
+        {
+            Dictionary<int,int> category = (Dictionary<int,int>)item.GetValue(info);
+            binaryWriter.Write(category.Count);
+            binaryWriter = SaveItems(binaryWriter, category);
+        }
+
+        // 생성된 Tuple List를 각 Name.bytes 파일로 저장
+        SaveToStorage(dataPath, memoryStream.ToArray());
+
+        binaryWriter.Close();
+        memoryStream.Close();
+    }
+
+    private BinaryWriter SaveItems(BinaryWriter note, Dictionary<int, int> category)
+    {
+        foreach (var item in category)
+        {
+            // item의 key
+            note.Write(item.Key);
+            // item의 개수
+            note.Write(item.Value);
+        }
         return note;
     }
 

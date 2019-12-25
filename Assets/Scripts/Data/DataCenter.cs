@@ -16,8 +16,7 @@ public class DataCenter
     public PlayInfo playInfo { get; private set; }
     public PlayerStatusInfo playerStatusInfo { get; private set; }
     public Dictionary<WeaponType, WeaponInfo> weapons { get; private set; }
-
-    private string[] skillKeys = new string[] { "0", "1_1", "2_1", "2_2", "2_3", "3_1" };
+    public InventoryInfo inventoryInfo { get; private set; }
 
     public DataCenter()
     {
@@ -50,11 +49,26 @@ public class DataCenter
             info.SetSkillTree(skillTree);
             weapons.Add(type, info);
         }
+
+        inventoryInfo = new InventoryInfo();
+    }
+    public void SetPlayInfo(PlayInfo value)
+    {
+        playInfo = value;
     }
 
+    public void SetPlayerStatusInfo(PlayerStatusInfo value)
+    {
+        playerStatusInfo = value;
+    }
     public void SetWeapons(Dictionary<WeaponType, WeaponInfo> value)
     {
         weapons.Clear();
         weapons = value;
+    }
+
+    public void SetInventoryInfo(InventoryInfo value)
+    {
+        inventoryInfo = value;
     }
 }

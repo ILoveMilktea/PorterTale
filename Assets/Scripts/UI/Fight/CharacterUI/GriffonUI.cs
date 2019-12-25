@@ -22,17 +22,17 @@ public class GriffonUI : CharacterUI
     }
     protected override void ChaseTarget()
     {
-        Vector3 UIWorldPos = target.transform.position + new Vector3(0, target.transform.lossyScale.y * 0.5f, 0);
+        //Vector3 UIWorldPos = target.transform.position + new Vector3(0, target.transform.lossyScale.y * 0.5f, 0);
+        Vector3 UIWorldPos = target.transform.position + new Vector3(0, target.transform.lossyScale.y * 0.3f, 0);
         Vector3 UIScreenPos = Camera.main.WorldToScreenPoint(UIWorldPos);
 
-        float fovX = 1920.0f / Screen.width;
-        float fovY = 1080.0f / Screen.height;
-        rectTransform.anchoredPosition = new Vector2(UIScreenPos.x * fovX, UIScreenPos.y * fovY);
+        rectTransform.anchoredPosition = new Vector2(UIScreenPos.x / canvas.scaleFactor, UIScreenPos.y / canvas.scaleFactor);
     }
 
     protected override void DisplayDamage(int value)
     {
-        Vector3 headPos = Camera.main.WorldToScreenPoint(target.transform.position + new Vector3(0, target.transform.lossyScale.y * 0.2f, 0));
+        //Vector3 headPos = Camera.main.WorldToScreenPoint(target.transform.position + new Vector3(0, target.transform.lossyScale.y * 0.2f, 0));
+        Vector3 headPos = Camera.main.WorldToScreenPoint(target.transform.position + new Vector3(0, target.transform.lossyScale.y, 0));
         Vector3 midPos = Camera.main.WorldToScreenPoint(target.transform.position);
 
         //rectTransform.anchoredPosition = new Vector2(UIScreenPos.x, UIScreenPos.y);

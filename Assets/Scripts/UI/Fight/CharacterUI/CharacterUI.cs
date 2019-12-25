@@ -14,6 +14,8 @@ public class CharacterUI : MonoBehaviour
     protected Transform target;
     protected RectTransform rectTransform;
 
+    protected Canvas canvas;
+
     protected virtual void Awake()
     {
         floatingText = Resources.Load("Prefab/UI/FloatingText") as GameObject;
@@ -22,6 +24,8 @@ public class CharacterUI : MonoBehaviour
         characterHp = GetComponentInChildren<Slider>();
 
         rectTransform = GetComponent<RectTransform>();
+
+        canvas = GetComponentInParent<Canvas>();
 
         characterName.resizeTextForBestFit = true;
     }
@@ -63,9 +67,8 @@ public class CharacterUI : MonoBehaviour
         Vector3 UIWorldPos = target.transform.position + new Vector3(0, target.transform.lossyScale.y, 0);
         Vector3 UIScreenPos = Camera.main.WorldToScreenPoint(UIWorldPos);
 
-        float fovX = 1920.0f / Screen.width;
-        float fovY = 1080.0f / Screen.height;
-        rectTransform.anchoredPosition = new Vector2(UIScreenPos.x * fovX, UIScreenPos.y * fovY);
+        rectTransform.anchoredPosition = new Vector2(UIScreenPos.x / canvas.scaleFactor, UIScreenPos.y / canvas.scaleFactor);
+        
     }
 
     public virtual void SetStatus(CharacterStatus status)
