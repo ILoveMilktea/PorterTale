@@ -337,12 +337,8 @@ public class FightSceneController : MonoSingleton<FightSceneController>
     }
     public void Retreat()
     {
-        ChangeFightState(FightState.End);
-        
-        OffAllBullets();
-        player.StopMove();
+        EndScene();
 
-        playTimer.StopTimer();
         DataManager.Instance.SetPlayTime(playTimer.GetPlaytime());
 
         DataManager.Instance.SetParts(fightStatus.gainParts);
@@ -356,12 +352,8 @@ public class FightSceneController : MonoSingleton<FightSceneController>
 
     public void GoNext()
     {
-        ChangeFightState(FightState.End);
+        EndScene();
 
-        OffAllBullets();
-        player.StopMove();
-
-        playTimer.StopTimer();
         DataManager.Instance.SetPlayTime(playTimer.GetPlaytime());
 
         DataManager.Instance.SetParts(fightStatus.gainParts);
@@ -374,8 +366,21 @@ public class FightSceneController : MonoSingleton<FightSceneController>
         GameManager.Instance.LoadNextScene(Constants.FightSceneName, Constants.UpgradeSceneName);
     }
 
+    public void EndScene()
+    {
+        ChangeFightState(FightState.End);
+
+        FightUIController.Instance.OffAllCharacterUI();
+        OffAllBullets();
+        player.StopMove();
+
+        playTimer.StopTimer();
+    }
+
     public void EscapeDungeon()
     {
+        EndScene();
+
         //나중에 돈 추가해줘
         DataManager.Instance.ResetDungeonData();
         DataManager.Instance.Save();

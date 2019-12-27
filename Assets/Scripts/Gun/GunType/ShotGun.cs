@@ -4,24 +4,9 @@ using UnityEngine;
 
 public class ShotGun : Gun
 {
-   
-    ////샷건 KnockBack Force
-    //public float knockBackforce = 10.0f;
-
-    ////발사체 날라가는 방향 개수
-    //public int directionNumber = 3;
-    ////발사체 나가는 최대각도
-    //public float projectileMaxAngle = 120.0f;
-    // -----------> Gun으로 이동
-
-    //발사체를 발사한 Object
-    private GameObject source;    
-
-    // Start is called before the first frame update
     private void Awake()
     {
         SetProjectilePrefabName(Const_ObjectPoolName.ShotGun_Bullet);
-        source = GameObject.FindGameObjectWithTag("Player");
     }
 
     override public void Shoot()
@@ -69,7 +54,7 @@ public class ShotGun : Gun
                 projectileTransform.rotation = muzzle.rotation;
                 Projectile newProjectile = newProjectileObject.GetComponent<Projectile>();
 
-                //GameObject source = FindObjectOfType<Player>().gameObject;
+                GameObject source = FindObjectOfType<Player>().gameObject;
                 newProjectile.SetSource(source);
                 newProjectile.SetRotation(Quaternion.Euler(newProjectile.transform.eulerAngles + new Vector3(0, tmpAngle, 0)));
                 tmpAngle += variation;
@@ -128,7 +113,7 @@ public class ShotGun : Gun
             projectileTransform.rotation = muzzle.rotation;
             Projectile newProjectile = newProjectileObject.GetComponent<Projectile>();
 
-            //GameObject source = FindObjectOfType<Player>().gameObject;
+            GameObject source = FindObjectOfType<Player>().gameObject;
             newProjectile.SetSource(source);
             newProjectile.SetRotation(Quaternion.Euler(newProjectile.transform.eulerAngles + new Vector3(0, tmpAngle, 0)));
             tmpAngle += variation;

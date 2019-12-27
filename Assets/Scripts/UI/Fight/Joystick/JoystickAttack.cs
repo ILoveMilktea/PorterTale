@@ -112,7 +112,8 @@ public class JoystickAttack : JoystickBase
 
     public void WeaponImageSwap(WeaponType weapon)
     {
-        equipingWeapon.sprite = Resources.Load<Sprite>("Image/Weapon/" + weapon.ToString());
+        //equipingWeapon.sprite = Resources.Load<Sprite>("Image/Weapon/" + weapon.ToString());
+        equipingWeapon.sprite = SpritePoolManager.Instance.Get(weapon.ToString());
     }
 
     private void TurnOnTrajectoryLine()

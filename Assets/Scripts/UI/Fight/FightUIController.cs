@@ -87,7 +87,8 @@ public class FightUIController : MonoSingleton<FightUIController>
     private void SetUIToAllCharacters()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        GameObject playerCharacterUIprefab = Instantiate(Resources.Load("Prefab/UI/PlayerCharacterUI"), characterUIGroup) as GameObject;
+        //GameObject playerCharacterUIprefab = Instantiate(Resources.Load("Prefab/UI/PlayerCharacterUI"), characterUIGroup) as GameObject;
+        GameObject playerCharacterUIprefab = UIPoolManager.Instance.Get("PlayerCharacterUI");
         playerCharacterUI = playerCharacterUIprefab.GetComponent<PlayerCharacterUI>();
 
         FightStatus fightStatus = FightSceneController.Instance.GetFightStatus();
@@ -95,6 +96,7 @@ public class FightUIController : MonoSingleton<FightUIController>
         CharacterStatus playerStatus = fightStatus.playerStatus;
         playerCharacterUI.SetStatus(playerStatus);
         playerCharacterUI.SetTarget(player);
+        playerCharacterUI.gameObject.SetActive(true);
         //playerCharacterUI.ResizeUI();
 
         GameObject[] enemies = fightStatus.enemies.Keys.ToArray();
@@ -103,7 +105,8 @@ public class FightUIController : MonoSingleton<FightUIController>
             CharacterStatus enemyStatus = FightSceneController.Instance.GetPlayerStatus();
             if (enemyStatus.name == DataManager.Instance.GetPlayInfo.CurDungeon)
             {
-                GameObject griffonUIprefab = Instantiate(Resources.Load("Prefab/UI/GriffonUI"), characterUIGroup) as GameObject;
+                //GameObject griffonUIprefab = Instantiate(Resources.Load("Prefab/UI/GriffonUI"), characterUIGroup) as GameObject;
+                GameObject griffonUIprefab = UIPoolManager.Instance.Get("GriffonUI");
                 enemyCharacterUIs.Add(enemy, griffonUIprefab.GetComponent<GriffonUI>());
                 enemyCharacterUIs[enemy].SetStatus(fightStatus.enemies[enemy]);
                 enemyCharacterUIs[enemy].SetTarget(enemy);
@@ -111,12 +114,14 @@ public class FightUIController : MonoSingleton<FightUIController>
             }
             else
             {
-                GameObject EnemyCharacterUIprefab = Instantiate(Resources.Load("Prefab/UI/EnemyCharacterUI"), characterUIGroup) as GameObject;
+                //GameObject EnemyCharacterUIprefab = Instantiate(Resources.Load("Prefab/UI/EnemyCharacterUI"), characterUIGroup) as GameObject;
+                GameObject EnemyCharacterUIprefab = UIPoolManager.Instance.Get("EnemyCharacterUI");
                 enemyCharacterUIs.Add(enemy, EnemyCharacterUIprefab.GetComponent<CharacterUI>());
                 
                 enemyCharacterUIs[enemy].SetStatus(fightStatus.enemies[enemy]);
                 enemyCharacterUIs[enemy].SetTarget(enemy);
             }
+            enemyCharacterUIs[enemy].gameObject.SetActive(true);
         }
     }
     // 일시 정지할때 표시 안할 ui grouping
@@ -149,7 +154,8 @@ public class FightUIController : MonoSingleton<FightUIController>
     {
         joystickSkill.gameObject.SetActive(true);
         string spriteName = WeaponSkillTable.Instance.GetTuple(type.ToString(), key).m_spriteName;
-        joystickSkill.SkillOn(Resources.Load<Sprite>("Image/Skill/" + spriteName));
+        //joystickSkill.SkillOn(Resources.Load<Sprite>("Image/Skill/" + spriteName));
+        joystickSkill.SkillOn(SpritePoolManager.Instance.Get(spriteName));
     }
 
     public void SkillButtonOff()
@@ -190,7 +196,7 @@ public class FightUIController : MonoSingleton<FightUIController>
     }
     public void SetUIEnemyDead(GameObject enemy)
     {
-        enemyCharacterUIs[enemy].gameObject.SetActive(false);
+        UIPoolManager.Instance.Free(enemyCharacterUIs[enemy].gameObject);
         enemyCharacterUIs.Remove(enemy);
     }
     public void OffAllCharacterUI() // 죽었을 때
@@ -201,9 +207,11 @@ public class FightUIController : MonoSingleton<FightUIController>
         {
             if (enemyCharacterUIs.ContainsKey(enemy))
             {
-                enemyCharacterUIs[enemy].gameObject.SetActive(false);
+                UIPoolManager.Instance.Free(enemyCharacterUIs[enemy].gameObject);
+                //enemyCharacterUIs[enemy].gameObject.SetActive(false);
             }
         }
+        UIPoolManager.Instance.Free(playerCharacterUI.gameObject);
         playerCharacterUI.gameObject.SetActive(false);
     }
     public void OnDeadWindow()

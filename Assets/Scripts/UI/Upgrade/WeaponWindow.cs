@@ -92,7 +92,9 @@ public class WeaponWindow : MonoBehaviour
         selectedWeapon.interactable = false;
 
         // replace background image
-        weaponImage.sprite = Resources.Load<Sprite>("Image/Weapon/" + selectedWeapon.image.name);
+        //weaponImage.sprite = Resources.Load<Sprite>("Image/Weapon/" + selectedWeapon.image.name);
+        weaponImage.sprite = SpritePoolManager.Instance.Get(selectedWeapon.image.name);
+
         curWeaponName = selectedWeapon.image.name;
         SetSkillTree();
         ResetSkillDescription();
@@ -120,7 +122,8 @@ public class WeaponWindow : MonoBehaviour
         {
             WeaponSkillInfo skill = WeaponSkillTable.Instance.GetTuple(curWeaponName, node.Key);
             // skill image
-            node.Value.button.image.sprite = Resources.Load<Sprite>("Image/Skill/" + skill.m_spriteName);
+            //node.Value.button.image.sprite = Resources.Load<Sprite>("Image/Skill/" + skill.m_spriteName);
+            node.Value.button.image.sprite = SpritePoolManager.Instance.Get(skill.m_spriteName);
             // skill text
             SetSkillTexts(node.Key, skill.m_skillName, skill.m_description);
             // skill path

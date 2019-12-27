@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Prefab을 ObjectPooling해서 관리하는 클래스
-public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
+public class UIPoolManager : MonoSingleton<UIPoolManager>
 {
     //기본 풀링개수
     public int defaultAmount = 10;
@@ -17,7 +16,7 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
     protected override void Init()
     {
         objectPoolList = new Dictionary<string, ObjectPool>();
-        DontDestroyOnLoad(Instance);
+        //DontDestroyOnLoad(Instance);
         InitObjectPool();
     }
     //private void Awake()
@@ -38,8 +37,8 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
             objectPool.source = poolList[i];
             objectPoolList[poolList[i].name] = objectPool;
 
-            GameObject folder = new GameObject();
-            folder.name = poolList[i].name;
+            //GameObject folder = new GameObject(poolList[i].name, typeof(RectTransform));
+            GameObject folder = new GameObject(poolList[i].name);
             folder.transform.parent = this.transform;
             objectPool.folder = folder;
 
@@ -55,9 +54,9 @@ public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
             for (int j = 0; j < amount; ++j)
             {
 
-                GameObject inst = Instantiate(objectPool.source);
+                GameObject inst = Instantiate(objectPool.source, folder.transform);
                 inst.SetActive(false);
-                inst.transform.parent = folder.transform;
+                //inst.transform.parent = folder.transform;
                 objectPool.unusedList.Add(inst);
 
                 //한번에 풀을 생성할 때 부하줄이기 위해서 코루틴 사용

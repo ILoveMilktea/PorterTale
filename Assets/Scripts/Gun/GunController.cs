@@ -26,6 +26,7 @@ public class GunController : MonoBehaviour
     public Transform weaponHold;
     public Gun startingGun;
     private Gun equippedGun;
+    private string poolFolderName;
 
     private WeaponType equipedWeaponType;
 
@@ -34,26 +35,26 @@ public class GunController : MonoBehaviour
         if(startingGun!=null)
         {
             equipedWeaponType = (WeaponType)Enum.Parse(typeof(WeaponType), startingGun.name);
-            EquipGun(startingGun);
+            EquipGun();
         }
     }
 
-    public void EquipGun(Gun gunToEquip)
+    public void EquipGun()
     {
         if(equippedGun!=null)
         {
-            Destroy(equippedGun.gameObject);
-            //equippedGun.gameObject.SetActive(false);
+            ObjectPoolManager.Instance.Free(equippedGun.gameObject, poolFolderName);
         }
-        //ObjectPool 방식으로 수정해야함
-        //gunToEquip.gameObject.SetActive(true);
-        //gunToEquip.transform.position = weaponHold.position;
-        //gunToEquip.transform.rotation = weaponHold.rotation;
 
-        //equippedGun = gunToEquip;
-        equippedGun = Instantiate(gunToEquip,weaponHold.position,weaponHold.rotation);
+        GameObject gunToEquip = ObjectPoolManager.Instance.Get(equipedWeaponType.ToString());
+        poolFolderName = gunToEquip.transform.parent.name;
+
+        gunToEquip.transform.position = weaponHold.position;
+        gunToEquip.transform.rotation = weaponHold.rotation;
+        gunToEquip.transform.parent = weaponHold;
+
+        equippedGun = gunToEquip.GetComponent<Gun>();
         ApplyActivatedSkill(equipedWeaponType, equippedGun);
-        equippedGun.transform.parent = weaponHold;
         equippedGun.gameObject.SetActive(true);
     }
 
@@ -105,10 +106,7 @@ public class GunController : MonoBehaviour
             equipedWeaponType++;
         }
 
-        //Gun gun = ObjectPoolManager.Instance.ReadFirstOneFromUnusedList(equipingWeapon.ToString()).GetComponent<Gun>();
-        //gunController.EquipGun(gun);
-        Gun gun = Resources.Load<Gun>("Prefab/Weapon/" + equipedWeaponType.ToString());
-        EquipGun(gun);
+        EquipGun();
 
         return equipedWeaponType;
     }

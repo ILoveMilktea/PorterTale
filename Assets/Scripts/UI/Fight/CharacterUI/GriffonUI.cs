@@ -31,19 +31,14 @@ public class GriffonUI : CharacterUI
 
     protected override void DisplayDamage(int value)
     {
-        //Vector3 headPos = Camera.main.WorldToScreenPoint(target.transform.position + new Vector3(0, target.transform.lossyScale.y * 0.2f, 0));
         Vector3 headPos = Camera.main.WorldToScreenPoint(target.transform.position + new Vector3(0, target.transform.lossyScale.y, 0));
         Vector3 midPos = Camera.main.WorldToScreenPoint(target.transform.position);
 
-        //rectTransform.anchoredPosition = new Vector2(UIScreenPos.x, UIScreenPos.y);
-
-        //GameObject damageText = ObjectPoolManager.Instance.Get("FloatingText");
-        //damageText.transform.parent = rectTransform;
-
-        GameObject damageText = Instantiate(floatingText, rectTransform) as GameObject;
-        RectTransform rt = damageText.GetComponent<RectTransform>();
+        GameObject floatingText = UIPoolManager.Instance.Get("FloatingText");
+        RectTransform rt = floatingText.GetComponent<RectTransform>();
         rt.anchoredPosition = rt.anchoredPosition - new Vector2(0f, (headPos.y - midPos.y) * 2);
 
-        StartCoroutine(damageText.GetComponent<FloatingText>().DisplayDamage(value, rectTransform));
+        floatingText.SetActive(true);
+        floatingText.GetComponent<FloatingText>().FloatDamage(value, target);
     }
 }
