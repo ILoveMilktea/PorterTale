@@ -13,7 +13,7 @@
 1차 빌드 이후 repository를 새로 생성했으며, 이전 주소는 https://github.com/ILoveMilktea/Dogfight 입니다.  
 많은 관심 바랍니다.
 
-12.27 플레이스토어 출시가 되었습니다. 아래 링크에서 확인하실 수 있습니다.  
+12.27 플레이스토어에 출시되었습니다. 아래 링크에서 확인하실 수 있습니다.  
 https://play.google.com/store/apps/details?id=com.panatale.portertale
 
 12.14 - 1차 플레이 영상 https://youtu.be/zepTD0QczKU  
