@@ -27,6 +27,8 @@ public class StartSceneController : MonoSingleton<StartSceneController>
     public void OnClickNewButton()
     {
         DataManager.Instance.RemoveSaveData();
+        //GameManager.Instance.LoadNextScene(Constants.StartSceneName, Constants.WorldMapSceneName);
+        //영준수정
         GameManager.Instance.LoadNextScene(Constants.StartSceneName, Constants.WorldMapSceneName);
     }
 
@@ -35,7 +37,7 @@ public class StartSceneController : MonoSingleton<StartSceneController>
         DataManager.Instance.Load();
         if(DataManager.Instance.GetPlayInfo.CurDungeon == "")
         {
-            GameManager.Instance.LoadNextScene(Constants.StartSceneName, Constants.WorldMapSceneName);
+            GameManager.Instance.LoadNextScene(Constants.StartSceneName, Constants.WorldMapSceneName);            
         }
         else
         {

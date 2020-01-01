@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UpgradeScene/Upgrade.unity
     guid: 23f9fd43de1016d4ca95eaf361a4defb
+  - enabled: 1
+    path: Assets/Scenes/VillageScene/VillageScene.unity
+    guid: 90abd8dbed56e9144af27118376aad06
+  - enabled: 1
+    path: Assets/Scenes/VillageScene/QuestHouseScene.unity
+    guid: d35b8a799e0a74d49b342bbe28b85d88
   m_configObjects: {}

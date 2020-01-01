@@ -11,6 +11,9 @@ static class Constants
     public const string StartSceneName = "StartScene";
     public const string FightSceneName = "FightScene"; // "Fight"
     public const string UpgradeSceneName = "Upgrade";
+    //영준추가
+    public const string VillageSceneName = "VillageScene";
+    public const string QuestHouseSceneName = "QuestHouseScene";
 
     public const string PlayerTag = "Player";
     public const string EnemyTag = "Enemy";
@@ -76,7 +79,7 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
     public void LoadNextScene(string curSceneName, string nextSceneName)
-    {
+    {        
         Button[] buttons = FindObjectsOfType<Button>();
         foreach (var button in buttons)
         {
@@ -104,6 +107,15 @@ public class GameManager : MonoSingleton<GameManager>
                 SetSlideImagePos(true);
                 StartCoroutine(UIEffect.SlideDownIn(slideEffectImage, UIEffectEndListener));
                 //StartCoroutine(UIEffect.AlphaIn(fadeEffectImage, UIEffectEndListener));
+                break;
+            case Constants.VillageSceneName:
+                IsUIEffectEnd = false;
+                StartCoroutine(UIEffect.CutOut(cutEffectImage, UIEffectEndListener));
+                break;
+            case Constants.QuestHouseSceneName:
+                //영준 수정
+                //IsUIEffectEnd = false;
+                //StartCoroutine(UIEffect.CutOut(cutEffectImage, UIEffectEndListener));
                 break;
         }
 

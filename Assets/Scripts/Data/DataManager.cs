@@ -11,6 +11,7 @@ static class Const_Path
     public const string playInfoPath = "/PlayInfo.byte";
     public const string playerStatusInfoPath = "/PlayerStatusInfo.byte";
     public const string WeaponInfoPath = "/WeaponInfo.byte";
+    public const string QuestInfoPath = "/QuestInfo.byte";
 }
 
 public class DataManager : MonoSingleton<DataManager>
@@ -58,6 +59,8 @@ public class DataManager : MonoSingleton<DataManager>
     public PlayInfo GetPlayInfo { get { return dataCenter.playInfo; } }
     public PlayerStatusInfo GetPlayerStatus { get { return dataCenter.playerStatusInfo; } }
     public Dictionary<WeaponType, WeaponInfo> GetWeapons { get { return dataCenter.weapons; } }
+    //영준 추가
+    public QuestInfo GetQuestInfo { get { return dataCenter.questInfo; } }
 
     public void SetPlayInfo(PlayInfo info)
     {
@@ -169,6 +172,11 @@ public class DataManager : MonoSingleton<DataManager>
     {
         GetWeapons[type].SetSkillTree(tree);
     }
+
+    public void SetQuestInfo(QuestInfo info)
+    {
+        GetQuestInfo.SetQuestStateList(info.questList);
+    }
     
     public bool CheckSaveData()
     {
@@ -186,6 +194,8 @@ public class DataManager : MonoSingleton<DataManager>
         File.Delete(dataPath + Const_Path.playInfoPath);
         File.Delete(dataPath + Const_Path.playerStatusInfoPath);
         File.Delete(dataPath + Const_Path.WeaponInfoPath);
+        //영준 추가
+        File.Delete(dataPath + Const_Path.QuestInfoPath);
     }
 
     public void Save()

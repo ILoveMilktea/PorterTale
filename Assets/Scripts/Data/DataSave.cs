@@ -12,6 +12,8 @@ public class DataSave
         SavePlayInfo(directoryPath + Const_Path.playInfoPath);
         SavePlayerStatusInfo(directoryPath + Const_Path.playerStatusInfoPath);
         SaveWeaponInfo(directoryPath + Const_Path.WeaponInfoPath);
+        //¿µÁØÃß°¡
+        SaveQuestInfo(directoryPath + Const_Path.QuestInfoPath);
     }
 
     private void SavePlayInfo(string dataPath)
@@ -27,7 +29,7 @@ public class DataSave
             binaryWriter = FindTypeAndWrite(binaryWriter, item.PropertyType, item.GetValue(info));
         }
 
-        // ìƒì„±ëœ Tuple Listë¥¼ ê° Name.bytes íŒŒì¼ë¡œ ì €ì¥
+        // ?ì„±??Tuple Listë¥?ê°?Name.bytes ?Œì¼ë¡??€??
         SaveToStorage(dataPath, memoryStream.ToArray());
 
         binaryWriter.Close();
@@ -46,7 +48,7 @@ public class DataSave
             binaryWriter = FindTypeAndWrite(binaryWriter, item.PropertyType, item.GetValue(info));
         }
 
-        // ìƒì„±ëœ Tuple Listë¥¼ ê° Name.bytes íŒŒì¼ë¡œ ì €ì¥
+        // ?ì„±??Tuple Listë¥?ê°?Name.bytes ?Œì¼ë¡??€??
         SaveToStorage(dataPath, memoryStream.ToArray());
 
         binaryWriter.Close();
@@ -66,7 +68,7 @@ public class DataSave
             binaryWriter = SaveWeapon(binaryWriter, weapon.Value);
         }
 
-        // ìƒì„±ëœ Tuple Listë¥¼ ê° Name.bytes íŒŒì¼ë¡œ ì €ì¥
+        // ?ì„±??Tuple Listë¥?ê°?Name.bytes ?Œì¼ë¡??€??
         SaveToStorage(dataPath, memoryStream.ToArray());
 
         binaryWriter.Close();
@@ -107,6 +109,44 @@ public class DataSave
         }
 
         return note;
+    }
+    
+    private void SaveQuestInfo(string dataPath)
+    {
+        //MemoryStream memoryStream = new MemoryStream();
+        //BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+
+        //QuestInfo info = DataManager.Instance.GetQuestInfo;
+        //PropertyInfo[] properties = info.GetType().GetProperties();
+
+        //foreach (PropertyInfo item in properties)
+        //{
+        //    binaryWriter = FindTypeAndWrite(binaryWriter, item.PropertyType, item.GetValue(info));
+        //}
+
+        //// ?ì„±??Tuple Listë¥?ê°?Name.bytes ?Œì¼ë¡??€??
+        //SaveToStorage(dataPath, memoryStream.ToArray());
+
+        //binaryWriter.Close();
+        //memoryStream.Close();
+
+        MemoryStream memoryStream = new MemoryStream();
+        BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+
+        QuestInfo questInfos = DataManager.Instance.GetQuestInfo;
+        binaryWriter.Write(questInfos.questList.Count);
+
+        foreach (var quest in questInfos.questList)
+        {
+            binaryWriter.Write(quest.Key.ToString());
+            binaryWriter.Write(quest.Value.ToString());
+        }
+
+        // ?ì„±??Tuple Listë¥?ê°?Name.bytes ?Œì¼ë¡??€??
+        SaveToStorage(dataPath, memoryStream.ToArray());
+
+        binaryWriter.Close();
+        memoryStream.Close();
     }
 
     private BinaryWriter FindTypeAndWrite(BinaryWriter note, Type propertyType, object item)

@@ -7,14 +7,16 @@ using UnityEngine.UI;
 public class WorldMapController : MonoSingleton<WorldMapController>
 {
     public Button Dungeon_Griffon;
-    public Button Dungeon_2;
+    public Button StartVillage;
 
     public PopupYN popupYN;
 
     protected override void Init()
     {
         Dungeon_Griffon.onClick.AddListener(OnClickDungeon_Griffon);
-        Dungeon_2.interactable = false;
+        //영준수정
+        //Dungeon_2.interactable = false;
+        StartVillage.onClick.AddListener(OnClickStartVillage);
 
         AwakeAllUIScript();
     }
@@ -32,11 +34,23 @@ public class WorldMapController : MonoSingleton<WorldMapController>
             EnterDungeon_Griffon, ClosePopupYN);
     }
 
+    public void OnClickStartVillage()
+    {
+        OpenPopupYN("시작마을로\n들어가시겠습니까?",
+            EnterStartVillage, ClosePopupYN);
+    }
+
     public void EnterDungeon_Griffon()
     {
         ClosePopupYN();
         DataManager.Instance.SetDungeonName(Const_AreaName.Dungeon_Griffon);
         GameManager.Instance.LoadNextScene(Constants.WorldMapSceneName, Constants.FightSceneName);
+    }
+
+    public void EnterStartVillage()
+    {
+        ClosePopupYN();        
+        GameManager.Instance.LoadNextScene(Constants.WorldMapSceneName, Constants.VillageSceneName);
     }
 
     public void OpenPopupYN(string description, Action yesFunc, Action noFunc)
