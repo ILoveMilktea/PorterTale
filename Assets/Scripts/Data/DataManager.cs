@@ -11,6 +11,7 @@ static class Const_Path
     public const string playInfoPath = "/PlayInfo.byte";
     public const string playerStatusInfoPath = "/PlayerStatusInfo.byte";
     public const string WeaponInfoPath = "/WeaponInfo.byte";
+    public const string QuestInfoPath = "/QuestInfo.byte";
     public const string InventoryInfoPath = "/InvetoryInfo.byte";
 }
 
@@ -73,6 +74,8 @@ public partial class DataManager : MonoSingleton<DataManager>
         File.Delete(dataPath + Const_Path.playInfoPath);
         File.Delete(dataPath + Const_Path.playerStatusInfoPath);
         File.Delete(dataPath + Const_Path.WeaponInfoPath);
+        //영준 추가
+        File.Delete(dataPath + Const_Path.QuestInfoPath);
     }
 
     public void Save()
@@ -251,5 +254,15 @@ public partial class DataManager : MonoSingleton<DataManager>
 
 
 
+}
+
+// Quest 부분
+public partial class DataManager : MonoSingleton<DataManager>
+{    //영준 추가
+    public QuestInfo GetQuestInfo { get { return dataCenter.questInfo; } }
+    public void SetQuestInfo(QuestInfo info)
+    {
+        GetQuestInfo.SetQuestStateList(info.questList);
+    }
 }
 

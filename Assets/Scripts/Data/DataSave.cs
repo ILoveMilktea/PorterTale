@@ -13,6 +13,8 @@ public class DataSave
         SavePlayerStatusInfo(directoryPath + Const_Path.playerStatusInfoPath);
         SaveWeaponInfo(directoryPath + Const_Path.WeaponInfoPath);
         SaveInventoryInfo(directoryPath + Const_Path.InventoryInfoPath);
+        //영준추가
+        SaveQuestInfo(directoryPath + Const_Path.QuestInfoPath);
     }
 
     private void SavePlayInfo(string dataPath)
@@ -158,6 +160,26 @@ public class DataSave
         }
 
         // 생성된 Tuple List를 각 Name.bytes 파일로 저장
+        SaveToStorage(dataPath, memoryStream.ToArray());
+
+        binaryWriter.Close();
+        memoryStream.Close();
+    }
+
+    private void SaveQuestInfo(string dataPath)
+    {
+        MemoryStream memoryStream = new MemoryStream();
+        BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+
+        QuestInfo questInfos = DataManager.Instance.GetQuestInfo;
+        binaryWriter.Write(questInfos.questList.Count);
+
+        foreach (var quest in questInfos.questList)
+        {
+            binaryWriter.Write(quest.Key.ToString());
+            binaryWriter.Write(quest.Value.ToString());
+        }
+
         SaveToStorage(dataPath, memoryStream.ToArray());
 
         binaryWriter.Close();

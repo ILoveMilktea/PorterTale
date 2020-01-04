@@ -12,7 +12,8 @@ public class DataLoad
         LoadPlayInfo(directoryPath + Const_Path.playInfoPath);
         LoadPlayerStatusInfo(directoryPath + Const_Path.playerStatusInfoPath);
         LoadWeaponInfo(directoryPath + Const_Path.WeaponInfoPath);
-       //LoadInvetoryInfo(directoryPath + Const_Path.InventoryInfoPath);
+        //LoadInvetoryInfo(directoryPath + Const_Path.InventoryInfoPath);
+        LoadQuestInfo(directoryPath + Const_Path.QuestInfoPath);
     }
 
 
@@ -97,7 +98,8 @@ public class DataLoad
 
         return info;
     }
-    
+
+
     private object SerializeReadData(BinaryReader note, object info)
     {
         PropertyInfo[] properties = info.GetType().GetProperties();
@@ -181,4 +183,30 @@ public class DataLoad
 
         return items;
     }
+    private void LoadQuestInfo(string dataPath)
+    {
+        byte[] saveFile = File.ReadAllBytes(dataPath);
+        MemoryStream memoryStream = new MemoryStream(saveFile);
+        BinaryReader binaryReader = new BinaryReader(memoryStream);
+
+        Dictionary<string, string> questList = new Dictionary<string, string>();
+        int count = binaryReader.ReadInt32();
+
+        for (int i = 0; i < count; i++)
+        {
+            string key = binaryReader.ReadString();
+            string value = binaryReader.ReadString();
+
+            questList.Add(key, value);
+        }
+
+        QuestInfo questInfo = new QuestInfo();
+        questInfo.SetQuestStateList(questList);
+        Debug.Log("데이터부름" + questInfo.questList["GriffonQuest"]);
+        DataManager.Instance.SetQuestInfo(questInfo);
+
+        binaryReader.Close();
+        memoryStream.Close();
+    }
+
 }

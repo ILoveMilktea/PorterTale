@@ -114,3 +114,29 @@ public class InventoryInfo
     public void SetDrops(Dictionary<int, int> value) { drops = value; }
 
 }
+
+
+public class QuestInfo
+{
+    //public int ParentKey { get; private set; }
+    public Dictionary<string, string> questList { get; private set; }
+
+    public QuestInfo()
+    {
+        questList = new Dictionary<string, string>();
+        questList.Add("GriffonQuest", "quest_available");
+    }
+
+    public void SetQuestStateList(Dictionary<string, string> questStateList) { this.questList = questStateList; }
+    public void SetQuestState(string questName, string questProgressState)
+    {
+        foreach (var quest in questList)
+        {
+            if (quest.Key == questName)
+            {
+                questList[questName] = questProgressState;
+                break;
+            }
+        }
+    }
+}

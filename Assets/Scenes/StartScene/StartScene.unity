@@ -298,6 +298,8 @@ GameObject:
   - component: {fileID: 106101083}
   - component: {fileID: 106101082}
   - component: {fileID: 106101084}
+  - component: {fileID: 106101086}
+  - component: {fileID: 106101085}
   m_Layer: 0
   m_Name: DataTable
   m_TagString: Untagged
@@ -377,6 +379,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f8a68da9d0877b4b81abdb95fcceb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &106101085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106101078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65d9dcacbfa2754ebefcdce145d9fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &106101086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106101078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2786de3beb2004fb163639d5398295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &165192922
@@ -1002,6 +1028,7 @@ GameObject:
   - component: {fileID: 876707042}
   - component: {fileID: 876707043}
   - component: {fileID: 876707044}
+  - component: {fileID: 876707045}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1229,6 +1256,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &876707045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876707037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ce398e733c84c459f8fede315a565b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1035538898
 GameObject:
   m_ObjectHideFlags: 0

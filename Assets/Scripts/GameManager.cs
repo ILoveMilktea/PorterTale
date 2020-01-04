@@ -11,6 +11,8 @@ static class Constants
     public const string StartSceneName = "StartScene";
     public const string FightSceneName = "FightScene"; // "Fight"
     public const string UpgradeSceneName = "Upgrade";
+    public const string VillageSceneName = "VillageScene";
+    public const string QuestHouseSceneName = "QuestHouseScene";
 
     public const string PlayerTag = "Player";
     public const string EnemyTag = "Enemy";
@@ -72,6 +74,15 @@ public class GameManager : MonoSingleton<GameManager>
                     StartCoroutine(UIEffect.SlideDownOut(slideEffectImage, UIEffectEndListener));
                 }
                 break;
+            case Constants.VillageSceneName:
+                IsUIEffectEnd = false;
+                StartCoroutine(UIEffect.CutIn(cutEffectImage, UIEffectEndListener));
+                break;
+            case Constants.QuestHouseSceneName:
+                //영준 수정
+                //IsUIEffectEnd = false;
+                //StartCoroutine(UIEffect.CutOut(cutEffectImage, UIEffectEndListener));
+                break;
         }
     }
 
@@ -104,6 +115,15 @@ public class GameManager : MonoSingleton<GameManager>
                 SetSlideImagePos(true);
                 StartCoroutine(UIEffect.SlideDownIn(slideEffectImage, UIEffectEndListener));
                 //StartCoroutine(UIEffect.AlphaIn(fadeEffectImage, UIEffectEndListener));
+                break;
+            case Constants.VillageSceneName:
+                IsUIEffectEnd = false;
+                StartCoroutine(UIEffect.CutOut(cutEffectImage, UIEffectEndListener));
+                break;
+            case Constants.QuestHouseSceneName:
+                //영준 수정
+                //IsUIEffectEnd = false;
+                //StartCoroutine(UIEffect.CutOut(cutEffectImage, UIEffectEndListener));
                 break;
         }
 

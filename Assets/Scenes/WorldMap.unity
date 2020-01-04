@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dungeon_Griffon: {fileID: 981926253}
-  Dungeon_2: {fileID: 2142854344}
+  StartVillage: {fileID: 2142854344}
   popupYN: {fileID: 1300820668309156070}
 --- !u!1 &520768411
 GameObject:

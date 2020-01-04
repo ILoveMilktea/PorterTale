@@ -17,6 +17,7 @@ public class DataCenter
     public PlayerStatusInfo playerStatusInfo { get; private set; }
     public Dictionary<WeaponType, WeaponInfo> weapons { get; private set; }
     public InventoryInfo inventoryInfo { get; private set; }
+    public QuestInfo questInfo { get; private set; }
 
     public DataCenter()
     {
@@ -28,7 +29,10 @@ public class DataCenter
         playerStatusInfo = new PlayerStatusInfo();
 
         weapons = new Dictionary<WeaponType, WeaponInfo>();
-        
+
+        //영준 추가
+        questInfo = new QuestInfo();
+
         foreach (WeaponType type in Enum.GetValues(typeof(WeaponType)))
         {
             WeaponInfo info = new WeaponInfo();
